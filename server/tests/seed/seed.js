@@ -18,16 +18,23 @@ const users = [{
 }, {
 	_id: userTwoID,
 	email: 'test2@testlocker.net',
-	password: 'userPassTwo'
+	password: 'userPassTwo',
+	tokens: [{
+		access: 'auth',
+		token: jwt.sign({_id: userTwoID, access: 'auth'}, 'abc123').toString()
+	}]
 }];
 
 const todos = [{
 	_id: new ObjectID(),
-	text: 'First test'
+	text: 'First test',
+	_creator: userOneID
 }, {
 	_id: new ObjectID(),
 	text: 'Second test',
-	completed: true
+	completed: true,
+	createdAt: 333,
+	_creator: userTwoID
 }];
 
 const populateTodos = (done) => {
